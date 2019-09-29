@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>net.jingles</groupId>
+    <artifactId>acf-example</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <repositories>
+        <repository>
+            <id>aikar</id>
+            <url>https://repo.aikar.co/content/groups/aikar/</url>
+        </repository>
+        <repository>
+            <id>spigot-repo</id>
+            <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <dependency>
+            <groupId>co.aikar</groupId>
+            <artifactId>acf-bukkit</artifactId>
+            <version>0.5.0-SNAPSHOT</version>
+            <!-- Scope must be compile, meaning it will be shaded (added into) your final jar when you
+             package your project. If you don't want the jar shaded in, specify which jars you *do* want
+             shaded in using <include> tags in the maven shade plugin configuration. Only do this if you
+             load ACF as its own plugin, like I do in my MOBA and Enchantment projects. -->
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.spigotmc</groupId>
+            <artifactId>spigot-api</artifactId>
+            <version>1.14.4-R0.1-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <release>12</release> <!-- This is the java version you are using -->
+                    <compilerArgs>
+                        <compilerArg>--enable-preview</compilerArg> <!-- Allows you to use certain java 12/13 features -->
+                        <compilerArg>-parameters</compilerArg> <!-- YOU NEED THIS FOR ACF HELP MESSAGES TO GENERATE PROPERLY -->
+                    </compilerArgs>
+                    <source>12</source> <!-- Source and Target are which bytecode version you are compiling against, which is Java 12 -->
+                    <target>12</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.19.1</version>
+                <configuration>
+                    <argLine>--enable-preview</argLine> <!-- Again, this allows you to use preview features -->
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+
+</project>
