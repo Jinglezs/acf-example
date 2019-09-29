@@ -71,7 +71,7 @@ public class ConfigCommand {
     if (input == null && type != ConfigValueType.DELETE)
       throw new InvalidCommandArgument("Must provide an input value if you are not deleting the current config value!");
 
-    // Input may be null because it is marked as
+    // Input may be null because it is marked as @Optional
     Object newValue = type.convert(input);
     config.set(path, type.convert(input));
 
